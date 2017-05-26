@@ -1,5 +1,7 @@
 #include "kalman_filter.h"
 
+#include <cmath>
+
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
@@ -7,6 +9,16 @@ using Eigen::VectorXd;
 ///////////////////////////////////////////////////////////////////////////
 namespace
 {
+
+inline float angleWrap (float angle)
+{
+	angle = std::fmod (angle + M_PI, M_PI * 2.0);
+
+	if (angle < 0)
+		angle += M_PI * 2.0;
+
+	return angle - M_PI;
+}
 
 inline Eigen::VectorXd hRadar (Eigen::VectorXd const &x)
 {
@@ -17,7 +29,7 @@ inline Eigen::VectorXd hRadar (Eigen::VectorXd const &x)
 	float const p = sqrt (x2 + y2);
 
 	y << p,     // p
-	     atan2 (x[1], x[0]), // phi
+	     angleWrap (std::atan2 (x[1], x[0])), // phi
 	     (x[0] * x[2] + x[1] * x[3]) / p;
 
 	return y;
@@ -84,8 +96,15 @@ void KalmanFilter::UpdateEKF(const VectorXd &z)
 	* update the state by using Extended Kalman Filter equations
 	*/
 
+	VectorXd z_norm = z;
+
+	z_norm(1) = angleWrap (z_norm(1));
+
 	VectorXd z_pred = hRadar (x_);
-	VectorXd y = z - z_pred;
+	VectorXd y = z_norm - z_pred;
+
+	y(1) = angleWrap (y(1));
+
 	MatrixXd Ht = H_.transpose();
 	MatrixXd S = H_ * P_ * Ht + R_;
 	MatrixXd Si = S.inverse();

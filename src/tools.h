@@ -1,11 +1,8 @@
 #pragma once
 
-#include <vector>
 #include "Eigen/Dense"
 
-using Eigen::MatrixXd;
-using Eigen::VectorXd;
-using namespace std;
+#include <vector>
 
 class Tools
 {
@@ -23,11 +20,11 @@ public:
 	/**
 	* A helper method to calculate RMSE.
 	*/
-	VectorXd CalculateRMSE(vector<VectorXd> const &estimations,
-	                       vector<VectorXd> const &ground_truth);
+	Eigen::VectorXd CalculateRMSE(std::vector<Eigen::VectorXd> const &estimations,
+	                              std::vector<Eigen::VectorXd> const &ground_truth);
 
 	/**
 	* A helper method to calculate Jacobians.
 	*/
-	MatrixXd CalculateJacobian(VectorXd const &x_state);
+	Eigen::MatrixXd CalculateJacobian(Eigen::VectorXd const &x_state);
 };

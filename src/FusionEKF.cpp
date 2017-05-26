@@ -1,16 +1,15 @@
 #include "FusionEKF.h"
 #include "tools.h"
-#include "Eigen/Dense"
-#include <iostream>
 
-using namespace std;
+#include "Eigen/Dense"
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
-using std::vector;
 
-/*
- * Constructor.
- */
+#include <iostream>
+using namespace std;
+
+
+///////////////////////////////////////////////////////////////////////////
 FusionEKF::FusionEKF()
 {
 	is_initialized_ = false;
@@ -42,7 +41,6 @@ FusionEKF::FusionEKF()
 	H_laser_ << 1, 0, 0, 0,
 	            0, 1, 0, 0;
 
-	/// \todo I think I might need to initialize this differently if we get radar first
 	ekf_.P_ = MatrixXd(4, 4);
 	ekf_.P_ << 1, 0, 0, 0,
 	           0, 1, 0, 0,
@@ -58,17 +56,12 @@ FusionEKF::FusionEKF()
 	ekf_.Q_ = MatrixXd(4, 4);
 }
 
-/**
-* Destructor.
-*/
 FusionEKF::~FusionEKF()
 {
 }
 
 void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
 {
-	if (measurement_pack.sensor_type_ == MeasurementPackage::LASER)
-		return;
 	/*****************************************************************************
 	*  Initialization
 	****************************************************************************/

@@ -1,14 +1,16 @@
 #pragma once
 
-#include "measurement_package.h"
-#include "Eigen/Dense"
-#include <vector>
-#include <string>
-#include <fstream>
 #include "kalman_filter.h"
+#include "measurement_package.h"
 #include "tools.h"
 
-class FusionEKF {
+#include "Eigen/Dense"
+
+#include <string>
+#include <fstream>
+
+class FusionEKF
+{
 public:
 	/**
 	* Constructor.
