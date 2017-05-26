@@ -1,5 +1,4 @@
-#ifndef KALMAN_FILTER_H_
-#define KALMAN_FILTER_H_
+#pragma once
 
 #include "Eigen/Dense"
 
@@ -65,5 +64,3 @@ public:
 	*/
 	void UpdateEKF(const Eigen::VectorXd &z);
 };
-
-#endif /* KALMAN_FILTER_H_ */

@@ -1,5 +1,4 @@
-#ifndef FusionEKF_H_
-#define FusionEKF_H_
+#pragma once
 
 #include "measurement_package.h"
 #include "Eigen/Dense"
@@ -45,5 +44,3 @@ private:
 	Eigen::MatrixXd H_laser_;
 	Eigen::MatrixXd Hj_;
 };
-
-#endif /* FusionEKF_H_ */

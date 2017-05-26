@@ -1,5 +1,5 @@
-#ifndef TOOLS_H_
-#define TOOLS_H_
+#pragma once
+
 #include <vector>
 #include "Eigen/Dense"
 
@@ -31,5 +31,3 @@ public:
 	*/
 	MatrixXd CalculateJacobian(VectorXd const &x_state);
 };
-
-#endif /* TOOLS_H_ */
