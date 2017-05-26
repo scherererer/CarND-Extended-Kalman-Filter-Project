@@ -112,7 +112,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
 	****************************************************************************/
 
 	/**
-	TODO:
 	* Update the state transition matrix F according to the new elapsed time.
 	- Time is measured in seconds.
 	* Update the process noise covariance matrix.
